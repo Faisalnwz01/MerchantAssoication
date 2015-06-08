@@ -1,0 +1,938 @@
+/*
+  Simple HTML form markup from bootstrap
+    Types:
+      ct-input--type1
+      ct-input--type2
+      ...
+      ct-input--type13
+
+    <div class="form-group ct-input--type13" id="input">
+      <input type="text" class="form-control" for="input">
+      <label data-content="Email"><span>Email</span></label>
+    </div>
+*/
+
+
+
+// Input Effects // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// based on http://tympanus.net/Development/TextInputEffects/
+
+.form-group {
+//  border: 1px solid yellowgreen;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 400px;
+  width: calc(100% - 2em);
+  vertical-align: top;
+  box-shadow:none;
+  outline:none;
+  .form-control{
+    height:auto;
+  }
+}
+
+.form-control {
+  position: relative;
+  display: block;
+  float: right;
+  padding: 0 0.4em;
+  font-size: 1.5rem;
+  line-height: 1em;
+  width: 60%;
+  border-radius: 0;
+  background: @gray-lighter;
+  color: @gray-light;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-appearance: none; /* for box shadows to show on iOS */
+}
+.form-control, .form-control:focus{
+  border: none;
+  outline:none;
+  box-shadow:none;
+}
+
+.form-control:focus {
+  outline: none;
+}
+
+label {
+  height:100%;
+  display: inline-block;
+  float: right;
+  padding: 0 1em;
+  width: 40%;
+  color: @gray;
+  font-weight: bold;
+  font-size: 18px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-bottom:0;
+
+  span {
+    position: relative;
+    display: block;
+    padding: 0.5em 0;
+    width: 100%;
+  }
+
+  .icon {
+    color: #ddd;
+    font-size: 150%;
+  }
+}
+
+// Individual Styles // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+.ct-input {
+
+  .form-control, .form-control:focus, .form-control:active{
+    outline: none !important;
+    border: none !important;
+    box-shadow: none;
+  }
+  .form-control{
+    color:transparent;
+  }
+
+  // Type1 -----------------------
+
+  &--type1 {
+    margin: 3em 0 0 0;
+
+    .form-control {
+      padding: 0.4em 0.25em;
+      width: 100%;
+      background: transparent;
+      color: @gray-light;
+    }
+
+    label {
+      position: absolute;
+      width: 100%;
+      text-align: left;
+      pointer-events: none;
+      font-size: 18px;
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 4px;
+        background: @gray;
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+      }
+      &:before {  top: 0;  }
+      &:after {  bottom: 0;  }
+
+      span {
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+      }
+    }
+
+    .form-control:focus + label span,
+    &.form-control--filled label span {
+      -webkit-transform: translate3d(0, -125%, 0);
+      transform: translate3d(0, -125%, 0);
+    }
+    .form-control:focus + label:before,
+    &.form-control--filled label:before {
+      -webkit-transform: translate3d(0, -0.75em, 0);
+      transform: translate3d(0, -0.75em, 0);
+    }
+    .form-control:focus + label:after,
+    &.form-control--filled label:after {
+      -webkit-transform: translate3d(0, 0.75em, 0);
+      transform: translate3d(0, 0.75em, 0);
+    }
+  }
+
+  // Type2 -----------------------
+
+  &--type2{
+    z-index: auto;
+
+    .form-control {
+      padding: 0.85em;
+      width: 100%;
+      background: @body-bg;
+      color:@gray-darker;
+      font-size: 14px;
+    }
+
+    label {
+      z-index: 0;
+      opacity:0;
+      padding-left: 2px;
+      font-weight: 300;
+      width: 100%;
+      text-align: left;
+      &:after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        width: 100%;
+        height: 100%;
+        background: rgba(30, 30, 30, 0.8);
+        opacity: 0;
+        -webkit-transition: opacity 0.3s;
+        transition: opacity 0.3s;
+        pointer-events: none;
+      }
+      span {
+        padding: 0.5em 0;
+        .ct-m-opacity(0);
+        position:absolute;
+      }
+    }
+
+    .form-control:focus,
+    .form-control:focus + label span {
+      z-index: 10000;
+    }
+    .form-control:focus + label {
+      color: #fff;
+      opacity: 1;
+      visibility: visible;
+      z-index:5000;
+      span{opacity:1}
+    }
+    .form-control:focus + label:after {
+      opacity: 1;
+      span{opacity:1}
+    }
+
+  }
+
+  // Type3 -----------------------
+
+  &--type3 {
+    overflow: hidden;
+    padding-top:2em;
+    margin-bottom:0;
+
+    .form-control {
+      padding: 0.65em 0.15em 0.9em 0.15em;
+      width: 100%;
+      background: transparent;
+      color: @gray;
+      font-size: 1.5em;
+      border-bottom:1px solid @gray-light;
+    }
+
+    label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 0 0.25em;
+      width: 100%;
+      text-align: left;
+      pointer-events: none;
+      overflow:hidden;
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-bottom: 1px solid @gray-light;
+      }
+      &:after {
+        margin-top: 2px;
+        border-bottom: 4px solid @brand-danger;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+      }
+      span {
+        position: absolute;
+        top:2em;
+        padding:0;
+      }
+    }
+
+    .label-primary:after {
+      border-color: hsl(200, 100%, 50%);
+    }
+    .label-success {
+      border-color: hsl(160, 100%, 50%);
+    }
+    .label-danger:after {
+      border-color: hsl(20, 100%, 50%);
+    }
+
+    .form-control:focus + label:after,
+    &.form-control--filled label:after {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+    .form-control:focus + label span,
+    &.form-control--filled span {
+      -webkit-animation: ct-inputAnimation1 0.3s forwards;
+      animation: ct-inputAnimation1 0.3s forwards;
+    }
+  }
+
+  // Type4 -----------------------
+
+  &--type4 {
+//    max-width: 320px;
+    margin-bottom: 3em;
+
+    .form-control {
+      width: 100%;
+      background: transparent;
+      color: @gray;
+      opacity: 0;
+      text-align: center;
+      -webkit-transition: opacity 0.3s;
+      transition: opacity 0.3s;
+      padding-top:0.4em;
+      padding-bottom:0.4em;
+    }
+
+    label {
+      padding:0;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      color: @brand-danger;
+      pointer-events: none;
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        border: 4px solid @gray;
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+      }
+      &:before {  border-right: none;  }
+      &:after {  left: 50%;  border-left: none;  }
+      span{
+        padding:0;
+        position:absolute;
+        bottom: 0.5em;
+      }
+    }
+
+    .form-control:focus,
+    &.form-control--filled .form-control {
+      opacity: 1;
+      -webkit-transition-delay: 0.3s;
+      transition-delay: 0.3s;
+    }
+    .form-control:focus + label:before,
+    &.form-control--filled label:before {
+      -webkit-transform: translate3d(-10%, 0, 0);
+      transform: translate3d(-10%, 0, 0);
+    }
+    .form-control:focus + label:after,
+    &.form-control--filled label:after {
+      -webkit-transform: translate3d(10%, 0, 0);
+      transform: translate3d(10%, 0, 0);
+    }
+    .form-control:focus + label span,
+    &.form-control--filled span {
+      -webkit-animation: ct-inputAnimation2 0.3s forwards;
+      animation: ct-inputAnimation2 0.3s forwards;
+    }
+  }
+
+  // Type5 -------------------------------------------
+
+
+  &--type5 {
+    margin:0;
+
+    .form-control {
+      padding: 0.4em 0.5em;
+      width: 100%;
+      background: transparent;
+      color: #DDE2E2;
+      opacity: 0;
+      -webkit-transition: opacity 0.3s;
+      transition: opacity 0.3s;
+    }
+
+    label {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      text-align: left;
+      pointer-events: none;
+      span{
+        padding: 0.5em 0;
+      }
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+      }
+      &:before {
+        border-top: 2px solid @gray;
+        -webkit-transform: translate3d(0, 100%, 0) translate3d(0, -2px, 0);
+        transform: translate3d(0, 100%, 0) translate3d(0, -2px, 0);
+        -webkit-transition-delay: 0.3s;
+        transition-delay: 0.3s;
+      }
+      &:after {
+        z-index: -1;
+        background: @gray;
+        -webkit-transform: scale3d(1, 0, 1);
+        transform: scale3d(1, 0, 1);
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+      }
+      span {
+        -webkit-transition: -webkit-transform 0.3s 0.3s;
+        transition: transform 0.3s 0.3s;
+      }
+    }
+
+
+    .form-control:focus,
+    &.form-control--filled .form-control {
+      opacity: 1;
+      -webkit-transition-delay: 0.3s;
+      transition-delay: 0.3s;
+    }
+    .form-control:focus + label span,
+    &.form-control--filled span {
+      -webkit-transform: translate3d(0, -90%, 0);
+      transform: translate3d(0, -90%, 0);
+      -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+      transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+    }
+    .form-control:focus + label:before,
+    &.form-control--filled label:before {
+      -webkit-transition-delay: 0s;
+      transition-delay: 0s;
+    }
+    .form-control:focus + label:before,
+    &.form-control--filled label:before {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+    .form-control:focus + label:after,
+    &.form-control--filled label:after {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+      -webkit-transition-delay: 0.3s;
+      transition-delay: 0.3s;
+      -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+      transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+    }
+  }
+  
+  // Type6 -------------------------------
+  
+  &--type6 {
+
+    .form-control {
+      width: 100%;
+      background: #fff;
+      box-shadow: 0px 0px 0px 2px transparent;
+      color: @motive !important;
+      -webkit-transition: box-shadow 0.3s;
+      transition: box-shadow 0.3s;
+      padding: 0.5em;
+    }
+    label {
+      padding: 0;
+      width: 100%;
+      text-align: left;
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        z-index: -1;
+        width: 100%;
+//        height: 65%;
+        box-shadow: 0px 0px 0px 0px;
+        color: rgba(157,157,157, 0.6);
+      }
+      span {
+        padding: 0 0.15em;
+      }
+    }
+
+    input + label:after{
+      height: 40%;
+    }
+    textarea + label:after{
+      height: 75%;
+    }
+
+    .form-control:focus {
+      box-shadow: 0px 0px 0px 2px @motive;
+    }
+    .form-control:focus + label {
+      pointer-events: none;
+    }
+    .form-control:focus + label:after {
+      -webkit-animation: ct-inputAnimation3 0.3s forwards;
+      animation: ct-inputAnimation3 0.3s forwards;
+    }
+  }
+
+  // Type7 ----------------------------------------------
+
+  &--type7 {
+    margin-bottom:2em;
+
+    .form-control {
+      z-index: 10;
+      width: 100%;
+      background: transparent;
+      color: #f5f5f5;
+      opacity: 0;
+      -webkit-transition: opacity 0.3s;
+      transition: opacity 0.3s;
+      line-height: 1.8em;
+    }
+
+    label {
+      position: absolute;
+      bottom:0;
+      width: 100%;
+      color: @brand-danger;
+      text-align: left;
+      &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: @brand-danger;
+        -webkit-transform: perspective(1000px) rotate3d(1, 0, 0, 90deg);
+        transform: perspective(1000px) rotate3d(1, 0, 0, 90deg);
+        -webkit-transform-origin: 50% 100%;
+        transform-origin: 50% 100%;
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0.25em;
+        background: @brand-danger;
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+      }
+      span {
+        padding:0;
+        position:absolute;
+        bottom:-1.5em;
+        left:0;
+      }
+    }
+
+    .form-control:focus,
+    &.form-control--filled .form-control {
+      opacity: 1;
+      -webkit-transition-delay: 0.3s;
+      transition-delay: 0.3s;
+    }
+
+    .form-control:focus + label:before,
+    &.form-control--filled label:before {
+      -webkit-transform: perspective(1000px) rotate3d(1, 0, 0, 0deg);
+      transform: perspective(1000px) rotate3d(1, 0, 0, 0deg);
+    }
+
+    .form-control:focus + label,
+    &.form-control--filled label {
+      pointer-events: none;
+    }
+
+    .form-control:focus + label:after,
+    &.form-control--filled label:after {
+      -webkit-transform: perspective(1000px) rotate3d(1, 0, 0, -90deg);
+      transform: perspective(1000px) rotate3d(1, 0, 0, -90deg);
+    }
+  }
+
+  // Type8 -----------------------------------------------------------
+
+  &--type8 {
+//    border:1px solid @motive;
+    position:relative;
+
+    .form-control {
+      position: relative;
+      z-index: 100;
+      padding: 2.3em 0.75em 0.75em 0.75em;
+      width: 100%;
+      background: transparent;
+      color: @gray-darker;
+      font-size: 1.5em;
+      border:1px solid #1f1f1f;
+    }
+
+    label {
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      text-align: left;
+      position:absolute;
+      &:before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        width: 100%;
+        height: 100%;
+        border: 0px solid transparent;
+        -webkit-transition: border-width 0.3s, border-color 0.3s;
+        transition: border-width 0.3s, border-color 0.3s;
+      }
+      span {
+        padding: 2em 1em;
+        -webkit-transform-origin: 0% 50%;
+        transform-origin: 0% 50%;
+        -webkit-transition: -webkit-transform 0.3s, color 0.3s;
+        transition: transform 0.3s, color 0.3s;
+
+        text-rendering: geometricPrecision;
+      }
+    }
+
+    .form-control:focus + label:before,
+    &.form-control--filled label:before {
+      border-width: 8px;
+      border-color: @gray-darker;
+      border-top-width: 2em;
+    }
+    .form-control:focus + label span,
+    &.form-control--filled label span {
+      border-color: transparent;
+      color: #fff;
+      -webkit-transform: translate3d(0, -1.75em, 0) scale3d(0.75, 0.75, 1);
+      transform: translate3d(0, -1.75em, 0) scale3d(0.75, 0.75, 1) translateZ(1px);
+    }
+    .form-control:focus + label, &.form-control--filled label{
+      top:0em;
+    }
+  }
+
+  // Type9 ------------------------------------------------------
+
+  &--type9 {
+    margin: 1.1em;
+
+    .form-control {
+      width: 100%;
+      background: transparent;
+      color: @gray;
+      z-index: 10;
+      border:1px solid @gray;
+      padding:10px;
+    }
+
+    label {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      color: @gray;
+      text-align: left;
+      cursor: text;
+      span {
+        -webkit-transform-origin: 0% 50%;
+        transform-origin: 0% 50%;
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+        padding:10px 0;
+      }
+      .graphic {
+        position: absolute;
+        top: 0;
+        left: 0;
+        fill: none;
+        -webkit-transform: scale3d(1, -1, 1);
+        transform: scale3d(1, -1, 1);
+        -webkit-transition: stroke-dashoffset 0.3s;
+        transition: stroke-dashoffset 0.3s;
+        pointer-events: none;
+
+        stroke: @gray;
+        stroke-width: 4px;
+        stroke-dasharray: 962;
+        stroke-dashoffset: 558;
+      }
+    }
+
+    .form-control:focus + label,
+    &.form-control--filled label {
+      cursor: default;
+      pointer-events: none;
+    }
+    .form-control:focus + label .graphic,
+    &.form-control--filled .graphic {
+      stroke-dashoffset: 0;
+    }
+    .form-control:focus + label span,
+    &.form-control--filled span {
+      -webkit-transform: scale3d(0.81, 0.81, 1) translate3d(0, -100%, 0);
+      transform: scale3d(0.81, 0.81, 1) translate3d(0, -100%, 0);
+    }
+  }
+
+  // Type10 ---------------------------------------------------------
+
+  &--type10 {
+    display: block;
+    overflow: hidden;
+//    margin: 1em auto 2em;
+    background: @gray-light;
+
+    .form-control {
+      position: absolute;
+      top: 0;
+      right: 100%;
+      width: 60%;
+      height: 100%;
+      background: #fff;
+      color: @gray;
+      z-index:100;
+      -webkit-transition: -webkit-transform 0.5s;
+      transition: transform 0.5s;
+      -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+      transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+    }
+
+    label {
+      z-index: 10;
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-align: left;
+      cursor: text;
+      color:@gray-lighter;
+      -webkit-transform-origin: 0% 50%;
+      transform-origin: 0% 50%;
+      -webkit-transition: -webkit-transform 0.5s;
+      transition: transform 0.5s;
+      -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+      transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+      span{
+        color: #fff;
+      }
+    }
+
+    .form-control:focus,
+    &.form-control--filled .form-control {
+      -webkit-transform: translate3d(100%, 0, 0);
+      transform: translate3d(100%, 0, 0);
+      -webkit-transition-delay: 0.06s;
+      transition-delay: 0.06s;
+    }
+    .form-control:focus + label,
+    &.form-control--filled label {
+      -webkit-transform: translate3d(60%, 0, 0);
+      transform: translate3d(60%, 0, 0);
+      pointer-events: none;
+    }
+    @media screen and (max-width: 34em) {
+      .form-control:focus + label,
+      &.form-control--filled label {
+        -webkit-transform: translate3d(65%, 0, 0) scale3d(0.65, 0.65, 1);
+        transform: translate3d(65%, 0, 0) scale3d(0.65, 0.65, 1);
+        pointer-events: none;
+      }
+    }
+  }
+
+  // Type11 -------------------------------------------------------
+
+  &--type11 {
+    .form-control {
+      z-index: 10;
+      padding: 0.75em 0.1em 0.25em;
+      width: 100%;
+      background: transparent;
+      color: @gray;
+    }
+
+    label {
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+      width: 100%;
+      color: @gray-light;
+      text-align: left;
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 7px;
+        background: @gray-light;
+        -webkit-transform: scale3d(1, 0.4, 1);
+        transform: scale3d(1, 0.4, 1);
+        -webkit-transform-origin: 50% 100%;
+        transform-origin: 50% 100%;
+        -webkit-transition: -webkit-transform 0.3s, background-color 0.3s;
+        transition: transform 0.3s, background-color 0.3s;
+        -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+        transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+      }
+      &:after {
+        content: attr(data-content);
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0.75em 0.15em;
+        color: @brand-danger;
+        opacity: 0;
+        -webkit-transform: translate3d(0, 50%, 0);
+        transform: translate3d(0, 50%, 0);
+        -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+        transition: opacity 0.3s, transform 0.3s;
+        -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+        transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+        pointer-events: none;
+      }
+    }
+
+    span {
+      padding: 0.75em 0.15em;
+      -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+      transition: opacity 0.3s, transform 0.3s;
+      -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+      transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+    }
+
+    .form-control:focus + label:before {
+      background-color: @brand-danger;
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+    .form-control:focus + label {
+      pointer-events: none;
+    }
+    .form-control:focus + label:after {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+    .form-control:focus + label span {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -50%, 0);
+      transform: translate3d(0, -50%, 0);
+    }
+  }
+}
+
+// Animation 1 // ----------------------------------------
+@-webkit-keyframes ct-inputAnimation1 {
+  50% {
+    opacity: 0;
+    -webkit-transform: translate3d(1em, 0, 0);
+    transform: translate3d(1em, 0, 0);
+  }
+  51% {
+    opacity: 0;
+    -webkit-transform: translate3d(-1em, -40%, 0);
+    transform: translate3d(-1em, -40%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, -150%, 0);
+    transform: translate3d(0, -150%, 0);
+  }
+}
+@keyframes ct-inputAnimation1 {
+  50% {
+    opacity: 0;
+    -webkit-transform: translate3d(1em, 0, 0);
+    transform: translate3d(1em, 0, 0);
+  }
+  51% {
+    opacity: 0;
+    -webkit-transform: translate3d(-1em, -30%, 0);
+    transform: translate3d(-1em, -30%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, -43%, 0);
+    transform: translate3d(0, -30%, 0);
+  }
+}
+
+// Animation 2 // ------------------------------------------
+@-webkit-keyframes ct-inputAnimation2 {
+  50% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 1);
+    transform: scale3d(0.3, 0.3, 1);
+  }
+  51% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 2em, 0) scale3d(0.3, 0.3, 1);
+    transform: translate3d(0, 2em, 0) scale3d(0.3, 0.3, 1);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 2em, 0);
+    transform: translate3d(0, 2em, 0);
+  }
+}
+@keyframes ct-inputAnimation2 {
+  50% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 1);
+    transform: scale3d(0.3, 0.3, 1);
+  }
+  51% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 3.7em, 0) scale3d(0.3, 0.3, 1);
+    transform: translate3d(0, 3.7em, 0) scale3d(0.3, 0.3, 1);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 3.7em, 0);
+    transform: translate3d(0, 3.7em, 0);
+  }
+}
+
+// Animation 3 // ------------------------------------------
+@-webkit-keyframes ct-inputAnimation3 {
+  to {
+    box-shadow: 0px 0px 100px 50px;
+    opacity: 0;
+  }
+}
+@keyframes ct-inputAnimation3 {
+  to {
+    box-shadow: 0px 0px 100px 50px;
+    opacity: 0;
+  }
+}
